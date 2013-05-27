@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <script>
+            // var $_=function(thing) {return document.getElementById(thing).getContext("2d");};
+            // var gradBase = $_("gradBase");
+            // var gradient = $_("gradient");
+            function drawGrad() {
+                var gradBase = document.getElementById("gradBase").getContext("2d");
+                var gradient = document.getElementById("gradient").getContext("2d");
+                var gbImage = new Image();
+                gbImage.src = "images/gradientBase.png";
+                var gradImage = new Image();
+                gradImage.src = "images/gradient.png";
+                gradBase.drawImage(gbImage, 0, 0);
+                gradient.drawImage(gradImage, 0, 0);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="canvas_container" style="z-index: 0; position: relative; width: 200px; height: 200px;" onclick="drawGrad()">
+            <canvas id="gradBase" width="200" height="200" style="position: absolute; left: 0px; top: 0px; z-index: 1;"></canvas>
+            <canvas id="gradient" width="200" height="200" style="position: absolute; left: 0px; top: 0px; z-index: 2;"></canvas>
+        </div>
+    </body>
+</html>

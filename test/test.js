@@ -57,7 +57,7 @@ function drawCharacter(char_x, char_y, char_width, char_height) {
 	var l_shoulder = new Point(char_x-head_center.x, +head_center.y);
 	var r_shoulder = new Point(char_x+head_center.x, +head_center.y);
 	var arm_rest_offset = 2;
-	var l_elbow = new Point(l_shoulder.x + );
+	// var l_elbow = new Point(l_shoulder.x + );
 	var r_elbow = new Point();
 	var l_hip = new Point();
 	var r_hip = new Point();
