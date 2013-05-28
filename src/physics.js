@@ -9,8 +9,13 @@ var jsg_vec = (function() {
         this.y = y;
     };
 
+    // directional vectors
+    jsg_vec.prototype.down = jsg_vec(0, 1);
+    jsg_vec.prototype.up = jsg_vec(0, -1);
+    jsg_vec.prototype.left = jsg_vec(-1, 0);
+    jsg_vec.prototype.right = jsg_vec(1, 0);
     // member functions
-    jsg_vec3.prototype.copy = function(other) {
+    jsg_vec.prototype.copy = function(other) {
         this.x = other.x;
         this.y = other.y;
     }
@@ -74,6 +79,11 @@ var jsg_vec3 = (function() {
         this.z = c;
     };
     
+    // directional vectors
+    jsg_vec3.prototype.down = jsg_vec3(0, 1, 0);
+    jsg_vec3.prototype.up = jsg_vec3(0, -1, 0);
+    jsg_vec3.prototype.left = jsg_vec3(-1, 0, 0);
+    jsg_vec3.prototype.right = jsg_vec3(1, 0, 0);
     // member functions
     jsg_vec3.prototype.copy = function(other) {
         this.x = other.x;
@@ -190,31 +200,26 @@ var jsg_move = (function() {
 })();
 
 var jsg_physic = (function() {
-    //var _mass; // mass of the object
-    //var _inertia; // inertia?
-    //var _friction; // friction
-    //var _drag; // drag
-    //var _grav_flag; // any gravity?
-    //var _net_force; // net force without gravity
     var _gravity = 10;
+    var _gravity_direction = jsg_vec.down;
 
     var jsg_physic = function() {
         this.mass; // mass of the object
         this.inertia; // inertia?
         this.friction; // friction
         this.drag; // drag
-        this.grav_flag; // any gravity?
+        this.grav_flag; // apply gravity?
         this.net_force; // net force without gravity
     }
 
-    jsg_physic.prototype.addForce = function() {
-        
+    jsg_physic.prototype.addForce = function(force) {
+        this.net_force.add_set(this.net_force, force);
     }
-    jsg_physic.prototype.setGravity = function() {
-        
+    jsg_physic.prototype.setGravity = function(value) {
+        _gravity = value;
     }
     jsg_physic.prototype.applyGravity = function() {
-
+        return this.net_force.add(jsg_vec.down.muls(_gravity));
     }
 
     return jsg_physic;
